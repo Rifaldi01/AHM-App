@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\JabatanController;
 use App\Http\Controllers\user\LamaranController;
 use App\Http\Controllers\user\LokasiController;
 use App\Http\Controllers\user\ServiceController;
@@ -42,4 +43,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     Route::get('pegawai/edit/{id}',[PegawaiController::class,'edit'])->name('edit-pegawai');
     Route::post('pegawai/update/{id}',[PegawaiController::class,'update'])->name('update-pegawai');
     Route::get('pegawai/delete/{id}',[PegawaiController::class,'destroy'])->name('delete-pegawai');
+
+
+    // Route Jabatan
+    Route::get('jabatan',[JabatanController::class,'index'])->name('daffar-jabatan');
+    Route::post('jabatan/store',[JabatanController::class,'store'])->name('store-jabatan');
+    Route::get('jabatan/edit/{id}',[JabatanController::class,'edit'])->name('edit-jabatan');
+    Route::post('jabatan/update/{id}',[JabatanController::class,'update'])->name('update-jabatan');
+    Route::get('jabatan/delete/{id}',[JabatanController::class,'destroy'])->name('delete-jabatan');
 });
