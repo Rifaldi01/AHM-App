@@ -8,8 +8,8 @@
 <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css" rel="stylesheet"
     type="text/css">
 @endpush
-@section('title','Daftar pegawai')
-@section('page-title','Daftar pegawai')
+@section('title','Daftar jabatan')
+@section('page-title','Daftar jabatan')
 @section('content')
 <div class="row">
     <div class="col-lg-8">
