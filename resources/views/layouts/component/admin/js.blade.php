@@ -11,4 +11,8 @@
 <script src="{{ asset('assets-2/js/sidebar-menu.js') }}"></script>
 <!-- Custom scripts -->
 <script src="{{ asset('assets-2/js/app-script.js') }}"></script>
+<script src="{{ asset('assets-2/js/sweetalert2js.js') }}"></script>
+<!--Sweet Alerts -->
+<script src="{{ asset('assets-2/plugins/alerts-boxes/js/sweetalert.min.js') }}"></script>
+<script src="{{ asset('assets-2/plugins/alerts-boxes/js/sweet-alert-script.js') }}"></script>
 @stack('js')

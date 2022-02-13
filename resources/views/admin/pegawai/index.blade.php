@@ -136,7 +136,11 @@
 <script src="{{ asset('assets-2/plugins/bootstrap-datatable/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('assets-2/plugins/bootstrap-datatable/js/buttons.colVis.min.js') }}"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-
+@if (Session::has('success'))
+<script>
+    swal("Berhasil", "{{ Session::get('success') }},", "success");
+</script>
+@endif
 <script>
     $(document).ready(function() {
       //Default data table
