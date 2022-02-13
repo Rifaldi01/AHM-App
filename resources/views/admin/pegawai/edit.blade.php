@@ -61,12 +61,8 @@
                         <textarea name="alamat" rows="4" class="form-control" required>{{ $pegawai->alamat }}
                         </textarea>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
-                            Tutup</button>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>
-                            Simpan</button>
-                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>
+                        Simpan</button>
                 </form>
             </div>
         </div>
