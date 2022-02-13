@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jabatan;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -14,7 +16,11 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        return view('admin.pegawai.pegawai');
+        $pegawai = Pegawai::join('jabatans','jabatans.id','=','pegawais.jabatan_id')
+                            ->select('jabatans.*','pegawais.*')
+                            ->get();
+        $jabatan = Jabatan::all();
+        return view('admin.pegawai.index', compact('pegawai','jabatan'));
     }
 
     /**
@@ -35,7 +41,23 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $validated = $request->validate([
+            'nama_lengkap'   => 'required',
+            'jenis_kelamin'  => 'required',
+            'no_hp'          => 'required|unique:pegawais,no_hp',
+            'email'          => 'required|unique:pegawais,email',
+            'alamat'        => 'required'
+        ]);
+        $pegawai = Pegawai::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'jabatan_id'   => $request->jabatan_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+        ]);
+        return redirect()->route('daftar-pegawai')->with('success','Data berhasil di tambahkan');
     }
 
     /**
@@ -57,7 +79,9 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pegawai = Pegawai::find($id);
+        $jabatan = Jabatan::all();
+        return view('admin.pegawai.edit', compact('pegawai','jabatan'));
     }
 
     /**
@@ -69,7 +93,24 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $validated = $request->validate([
+            'nama_lengkap'   => 'required',
+            'jenis_kelamin'  => 'required',
+            'no_hp'          => 'required|unique:pegawais,no_hp,'.$id,
+            'email'          => 'required|unique:pegawais,email,'.$id,
+            'alamat'        => 'required'
+        ]);
+        $pegawai = Pegawai::find($id);
+        $pegawai->update([
+            'nama_lengkap' => $request->nama_lengkap,
+            'jabatan_id'   => $request->jabatan_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+        ]);
+        return redirect()->route('daftar-pegawai')->with('success','Data berhasil di update');
     }
 
     /**
@@ -80,6 +121,8 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pegawai = Pegawai::find($id);
+        $pegawai->delete();
+        return redirect()->back()->with('success','Data berhasil di hapus');
     }
 }

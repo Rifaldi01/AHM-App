@@ -6,6 +6,7 @@ use App\Http\Controllers\user\LokasiController;
 use App\Http\Controllers\user\ServiceController;
 use App\Http\Controllers\admin\GajiController;
 use App\Http\Controllers\admin\PegawaiController;
+use App\Http\Controllers\Admin\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,15 @@ Route::get('/lokasi-cabang', [LokasiController::class, 'index']);
 Route::get('/service', [ServiceController::class, 'index']);
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
-    Route::get('/gaji', [GajiController::class, 'index']);
-    Route::get('/pegawai', [PegawaiController::class, 'index']);
+
+    // Route dashboard
+    Route::get('dashboard',[DashboardController::class,'index']);
+
+
+    // Route pegawai
+    Route::get('pegawai',[PegawaiController::class,'index'])->name('daftar-pegawai');
+    Route::post('pegawai/store',[PegawaiController::class,'store'])->name('store-pegawai');
+    Route::get('pegawai/edit/{id}',[PegawaiController::class,'edit'])->name('edit-pegawai');
+    Route::post('pegawai/update/{id}',[PegawaiController::class,'update'])->name('update-pegawai');
+    Route::get('pegawai/delete/{id}',[PegawaiController::class,'destroy'])->name('delete-pegawai');
 });

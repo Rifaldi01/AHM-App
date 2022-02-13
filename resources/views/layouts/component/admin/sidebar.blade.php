@@ -1,44 +1,33 @@
 <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
     <div class="brand-logo">
-        <a href="{{URL::to('/')}}" class="mb-5">
-            <img src="{{URL::to('assets/images/mahaputra1.png')}}" class="img-fluid"
-                 style="max-width: 185px; height: auto; margin-left: 10%; margin-right: 10%;" alt="logo icon">
+        <a href="index.html">
+            <img src="{{ asset('assets-2/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
+            <h5 class="logo-text">RockerAdmin</h5>
         </a>
     </div>
-    <ul class="sidebar-menu do-nicescrol mt-2">
+    <ul class="sidebar-menu do-nicescrol">
         <li class="sidebar-header">MAIN NAVIGATION</li>
-
         <li>
-            <a href="{{URL::to('/')}}" class="">
-                <i class="icon-home"></i> <span>Dashboard</span> <i class=""></i>
+            <a href="{{ url('/admin/dashboard') }}" class="waves-effect">
+                <i class="icon-home"></i> <span>Dashboard</span>
             </a>
-
-        <li>
-
-        <li>
-            <a href="{{URL::to('/')}}" class="waves-effect">
-                <i class="icon-user"></i> <span>Kelola Pegawai</span> <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="{{URL::to('/admin/gaji')}}"><i class="fa fa-money icons"></i>Gaji</a></li>
-                <li><a href="{{URL::to('/admin/pegawai')}}"><i class="icon-user icon"></i> Pegawai</a></li>
-            </ul>
-
-        <li>
-            <a href="{{URL::to('/')}}" class="waves-effect">
-                <i class="icon-user"></i> <span>Kelola Jabatan</span> <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="sidebar-submenu">
-                <li><a href="{{URL::to('/admin/kelas')}}"><i class="fa fa-list-alt"></i>Daftar Jabatan</a></li>
-                <li><a href="{{URL::to('/admin/kelas')}}"><i class="fa fa-plus"></i>Create Jabatan</a></li>
-
-            </ul>
-        <li>
-            <a href="{{URL::to('/')}}" class="waves-effect">
-                <i class="fa fa-file icon"></i> <span>Lamaran</span> <i class=""></i>
-            </a>
-
         </li>
-     </ul>
+        <li>
+            <a href="javacsript:void(0)" class="waves-effect">
+                <i class="icon-user"></i> <span>Pegawai</span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="{{ url('admin/pegawai') }}"><i class="fa fa-circle-o"></i> Daftar pegawai</a></li>
+            </ul>
+            <ul class="sidebar-submenu">
+                <li><a href="{{ url('admin/gaji/pegawai') }}"><i class="fa fa-circle-o"></i> Gaji</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{{ url('/admin/jabatan') }}" class="waves-effect">
+                <i class="icon-home"></i> <span>Jabatan</span>
+            </a>
+        </li>
+    </ul>
 
 </div>
