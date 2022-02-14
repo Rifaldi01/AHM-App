@@ -107,8 +107,9 @@
                                 <td>{{ $data->email }}</td>
                                 <td>{{ $data->no_hp }}</td>
                                 <td>
-                                    <a href="{{ route('delete-pegawai',$data->id) }}"
-                                        class="btn btn-danger btn-sm waves-effect waves-light m-1">
+                                    <a href="javascript:void(0);" data-name="{{ $data->nama_lengkap }}"
+                                        data-href="{{ route('delete-pegawai',$data->id) }}" data-id="{{ $data->id }}"
+                                        class="btn btn-danger btn-sm waves-effect waves-light m-1 delete">
                                         <i class="fa fa-trash"></i> </a>
                                     <a href="{{ route('edit-pegawai',$data->id) }}"
                                         class="btn btn-info btn-sm waves-effect waves-light m-1">
@@ -156,7 +157,25 @@
      table.buttons().container()
         .appendTo( '#example_wrapper .col-md-6:eq(0)' );
 
-      } );
+    });
+
+    $('.delete').click(function (e) {
+        e.preventDefault();
+        var name = $('.delete').attr('data-name');
+        var getId = $('.delete').attr('data-id');
+        swal({
+            title: "Apakah kamu yakin ?",
+            text: "Kamu akan menghapus data "+name,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                window.location.href = $('.delete').attr('data-href');
+            }
+        });
+    });
 
 </script>
 @endpush

@@ -33,8 +33,9 @@
                                 <td>{{ $no+1 }}</td>
                                 <td>{{ $item->nama_jabatan }}</td>
                                 <td>
-                                    <a href="{{ route('delete-jabatan',$item->id) }}"
-                                        class="btn btn-danger btn-sm waves-effect waves-light m-1">
+                                    <a href="javascript:void(0)" data-name="{{ $item->nama_jabatan }}"
+                                        data-href="{{ route('delete-jabatan',$item->id) }}" data-id="{{ $item->id }}"
+                                        class="btn btn-danger btn-sm waves-effect waves-light m-1 delete">
                                         <i class="fa fa-trash"></i> </a>
                                     <a href="{{ route('edit-jabatan',$item->id) }}"
                                         class="btn btn-info btn-sm waves-effect waves-light m-1">
@@ -90,20 +91,37 @@
 
 <script>
     $(document).ready(function() {
-      //Default data table
-       $('#default-datatable').DataTable({
-       });
+        //Default data table
+        $('#default-datatable').DataTable({
+        });
 
 
-       var table = $('#example').DataTable( {
-        lengthChange: false,
-        buttons: [ 'copy', 'excel', 'pdf', 'print', 'colvis' ]
-      } );
+        var table = $('#example').DataTable( {
+            lengthChange: false,
+            buttons: [ 'copy', 'excel', 'pdf', 'print', 'colvis' ]
+        } );
 
-     table.buttons().container()
-        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+        table.buttons().container()
+            .appendTo( '#example_wrapper .col-md-6:eq(0)' );
 
-      } );
+    });
+    $('.delete').click(function (e) {
+        e.preventDefault();
+        var name = $('.delete').attr('data-name');
+        var getId = $('.delete').attr('data-id');
+        swal({
+            title: "Apakah kamu yakin ?",
+            text: "Kamu akan menghapus data "+name,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                window.location.href = $('.delete').attr('data-href');
+            }
+        });
+    });
 
 </script>
 @endpush
