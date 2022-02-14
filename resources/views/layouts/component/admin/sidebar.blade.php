@@ -20,7 +20,7 @@
                 <li><a href="{{ url('admin/pegawai') }}"><i class="fa fa-circle-o"></i> Daftar pegawai</a></li>
             </ul>
             <ul class="sidebar-submenu">
-                <li><a href="{{ url('admin/gaji/pegawai') }}"><i class="fa fa-circle-o"></i> Gaji</a></li>
+                <li><a href="{{ url('admin/gaji') }}"><i class="fa fa-circle-o"></i> Gaji</a></li>
             </ul>
         </li>
         <li>

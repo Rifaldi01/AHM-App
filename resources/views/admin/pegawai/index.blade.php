@@ -178,8 +178,8 @@
 
     $('.delete').click(function (e) {
         e.preventDefault();
-        var name = $('.delete').attr('data-name');
-        var getId = $('.delete').attr('data-id');
+        var name = $(this).attr('data-name');
+        var getId = $(this).attr('data-id');
         swal({
             title: "Apakah kamu yakin ?",
             text: "Kamu akan menghapus data "+name,

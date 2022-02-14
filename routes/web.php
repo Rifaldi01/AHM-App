@@ -59,9 +59,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     Route::get('jabatan/delete/{id}', [JabatanController::class, 'destroy'])->name('delete-jabatan');
 
     // Route Gaji
-    Route::get('gaji', [GajiController::class, 'index']);
-    Route::get('gaji/store', [GajiController::class, 'store']);
-    Route::get('gaji/edit/{id}', [GajiController::class, 'edit']);
-    Route::get('gaji/update/{id}', [GajiController::class, 'update']);
-    Route::get('gaji/delete/{id}', [GajiController::class, 'destroy']);
+    Route::get('gaji', [GajiController::class, 'index'])->name('daftar-gaji');
+    Route::post('gaji/store', [GajiController::class, 'store'])->name('store-gaji');
+    Route::get('gaji/edit/{id}', [GajiController::class, 'edit'])->name('edit-gaji');
+    Route::get('gaji/update/{id}', [GajiController::class, 'update'])->name('update-gaji');
+    Route::get('gaji/delete/{id}', [GajiController::class, 'destroy'])->name('delete-jabatan');
 });
