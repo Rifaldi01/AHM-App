@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lamaran;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 
 class LamaranController extends Controller
@@ -17,6 +19,21 @@ class LamaranController extends Controller
         return view('user.lamaran');
     }
 
+    public function approve($id)
+    {
+        $lamaran = Lamaran::find($id);
+        $pegawai = new Pegawai();
+        $pegawai->nama_lengkap = $lamaran->nama_lengkap;
+        $pegawai->jenis_kelamin = $lamaran->jenis_kelamin;
+        $pegawai->alamat = $lamaran->alamat;
+        $pegawai->no_hp = $lamaran->no_hp;
+        $pegawai->email = $lamaran->email;
+        $pegawai->jabatan_id = 2;
+        $lamaran->status = "di terima";
+        $lamaran->save();
+        $pegawai->save();
+        return redirect()->back()->with('success', 'Lamaran sudah di setujui');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -44,9 +61,10 @@ class LamaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $lamaran = Lamaran::all();
+        return view('admin.lamaran.index', compact('lamaran'));
     }
 
     /**

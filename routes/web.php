@@ -34,6 +34,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //user
 Route::get('/lamaran', [LamaranController::class, 'index']);
+Route::post('lamaran/store', [LamaranController::class, 'store'])->name('store-lamaran');
 Route::get('/lokasi-cabang', [LokasiController::class, 'index']);
 Route::get('/service', [ServiceController::class, 'index']);
 //admin
@@ -64,4 +65,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     Route::get('gaji/edit/{id}', [GajiController::class, 'edit'])->name('edit-gaji');
     Route::get('gaji/update/{id}', [GajiController::class, 'update'])->name('update-gaji');
     Route::get('gaji/delete/{id}', [GajiController::class, 'destroy'])->name('delete-jabatan');
+
+    // Route Gaji
+    Route::get('lamaran', [LamaranController::class, 'show'])->name('daftar-lamaran');
+    Route::get('lamaran/terima/{id}', [LamaranController::class, 'approve'])->name('terima-lamaran');
+    Route::get('lamaran/edit/{id}', [LamaranController::class, 'edit'])->name('edit-lamaran');
+    Route::get('lamaran/update/{id}', [LamaranController::class, 'update'])->name('update-lamaran');
+    Route::get('lamaran/delete/{id}', [LamaranController::class, 'destroy'])->name('delete-lamaran');
 });

@@ -25,7 +25,12 @@
         </li>
         <li>
             <a href="{{ url('/admin/jabatan') }}" class="waves-effect">
-                <i class="icon-home"></i> <span>Jabatan</span>
+                <i class="icon-user"></i> <span>Jabatan</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('/admin/lamaran') }}" class="waves-effect">
+                <i class="fa fa-book"></i> <span>lamaran</span>
             </a>
         </li>
     </ul>

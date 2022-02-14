@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             JabatanSeeder::class,
             PegawaiSeeder::class,
             GajiSeeder::class,
+            LamaranSeeder::class,
         ]);
     }
 }
