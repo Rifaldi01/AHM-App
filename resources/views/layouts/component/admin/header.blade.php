@@ -18,4 +18,6 @@
 <link href="{{ asset('assets-2/css/sidebar-menu.css') }}" rel="stylesheet" />
 <!-- Custom Style-->
 <link href="{{ asset('assets-2/css/app-style.css') }}" rel="stylesheet" />
+<!-- notifications css -->
+<link rel="stylesheet" href="{{ asset('assets-2/plugins/notifications/css/lobibox.min.css') }}" />
 @stack('css')

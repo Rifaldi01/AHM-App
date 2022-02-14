@@ -11,6 +11,23 @@
 @section('title','Daftar pegawai')
 @section('page-title','Daftar pegawai')
 @section('content')
+@if($errors->any())
+<div class="row">
+    @foreach ($errors->all() as $data)
+    <div class="col-lg-4">
+        <div class="alert alert-icon-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <div class="alert-icon icon-part-danger">
+                <i class="icon-check"></i>
+            </div>
+            <div class="alert-message">
+                <span><strong>Kesalahan </strong>{{ $data }}</span>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
+@endif
 <div class="row">
     <div class="col-lg-12">
         <div class="card">

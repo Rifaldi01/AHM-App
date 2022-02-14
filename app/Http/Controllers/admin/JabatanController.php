@@ -16,7 +16,7 @@ class JabatanController extends Controller
     public function index()
     {
         $jabatan = Jabatan::all();
-        return view('admin.jabatan.index',compact('jabatan'));
+        return view('admin.jabatan.index', compact('jabatan'));
     }
 
     /**
@@ -37,13 +37,19 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nama_jabatan' => 'required|unique:jabatans,nama_jabatan',
-        ]);
+        $request->validate(
+            [
+                'nama_jabatan' => 'required|unique:jabatans,nama_jabatan',
+            ],
+            [
+                'nama_jabatan.required' => 'Nama jabatan wajib di isi',
+                'nama_jabatan.unique' => 'Nama jabatan sudah di pakai',
+            ]
+        );
         $jabatan = new Jabatan();
         $jabatan->nama_jabatan = $request->nama_jabatan;
         $jabatan->save();
-        return redirect()->back()->with('success','Data berhasil di tambahakan');
+        return redirect()->back()->with('success', 'Data berhasil di tambahakan');
     }
 
     /**
@@ -78,13 +84,19 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'nama_jabatan' => 'required|unique:jabatans,nama_jabatan,'.$id,
-        ]);
+        $validated = $request->validate(
+            [
+                'nama_jabatan' => 'required|unique:jabatans,nama_jabatan,' . $id,
+            ],
+            [
+                'nama_jabatan.required' => 'Nama jabatan wajib di isi',
+                'nama_jabatan.unique' => 'Nama jabatan sudah di pakai',
+            ]
+        );
         $jabatan = Jabatan::find($id);
         $jabatan->nama_jabatan = $request->nama_jabatan;
         $jabatan->save();
-        return redirect()->route('daffar-jabatan')->with('success','Data berhasil di update');
+        return redirect()->route('daffar-jabatan')->with('success', 'Data berhasil di update');
     }
 
     /**
@@ -97,6 +109,6 @@ class JabatanController extends Controller
     {
         $jabatan = Jabatan::find($id);
         $jabatan->delete();
-        return redirect()->back()->with('success','Data berhasil di hapus');
+        return redirect()->back()->with('success', 'Data berhasil di hapus');
     }
 }

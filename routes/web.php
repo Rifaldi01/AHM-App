@@ -8,6 +8,8 @@ use App\Http\Controllers\user\ServiceController;
 use App\Http\Controllers\admin\GajiController;
 use App\Http\Controllers\admin\PegawaiController;
 use App\Http\Controllers\Admin\DashboardController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +24,10 @@ use App\Http\Controllers\Admin\DashboardController;
 Route::get('/', function () {
     return view('layouts.master-user');
 });
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('login');
+});
 
 Auth::routes();
 
@@ -34,28 +40,28 @@ Route::get('/service', [ServiceController::class, 'index']);
 Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
 
     // Route dashboard
-    Route::get('dashboard',[DashboardController::class,'index']);
+    Route::get('dashboard', [DashboardController::class, 'index']);
 
 
     // Route pegawai
-    Route::get('pegawai',[PegawaiController::class,'index'])->name('daftar-pegawai');
-    Route::post('pegawai/store',[PegawaiController::class,'store'])->name('store-pegawai');
-    Route::get('pegawai/edit/{id}',[PegawaiController::class,'edit'])->name('edit-pegawai');
-    Route::post('pegawai/update/{id}',[PegawaiController::class,'update'])->name('update-pegawai');
-    Route::get('pegawai/delete/{id}',[PegawaiController::class,'destroy'])->name('delete-pegawai');
+    Route::get('pegawai', [PegawaiController::class, 'index'])->name('daftar-pegawai');
+    Route::post('pegawai/store', [PegawaiController::class, 'store'])->name('store-pegawai');
+    Route::get('pegawai/edit/{id}', [PegawaiController::class, 'edit'])->name('edit-pegawai');
+    Route::post('pegawai/update/{id}', [PegawaiController::class, 'update'])->name('update-pegawai');
+    Route::get('pegawai/delete/{id}', [PegawaiController::class, 'destroy'])->name('delete-pegawai');
 
 
     // Route Jabatan
-    Route::get('jabatan',[JabatanController::class,'index'])->name('daffar-jabatan');
-    Route::post('jabatan/store',[JabatanController::class,'store'])->name('store-jabatan');
-    Route::get('jabatan/edit/{id}',[JabatanController::class,'edit'])->name('edit-jabatan');
-    Route::post('jabatan/update/{id}',[JabatanController::class,'update'])->name('update-jabatan');
-    Route::get('jabatan/delete/{id}',[JabatanController::class,'destroy'])->name('delete-jabatan');
+    Route::get('jabatan', [JabatanController::class, 'index'])->name('daffar-jabatan');
+    Route::post('jabatan/store', [JabatanController::class, 'store'])->name('store-jabatan');
+    Route::get('jabatan/edit/{id}', [JabatanController::class, 'edit'])->name('edit-jabatan');
+    Route::post('jabatan/update/{id}', [JabatanController::class, 'update'])->name('update-jabatan');
+    Route::get('jabatan/delete/{id}', [JabatanController::class, 'destroy'])->name('delete-jabatan');
 
     // Route Gaji
-    Route::get('gaji',[GajiController::class,'index']);
-    Route::get('gaji/store',[GajiController::class,'store']);
-    Route::get('gaji/edit/{id}',[GajiController::class,'edit']);
-    Route::get('gaji/update/{id}',[GajiController::class,'update']);
-    Route::get('gaji/delete/{id}',[GajiController::class,'destroy']);
+    Route::get('gaji', [GajiController::class, 'index']);
+    Route::get('gaji/store', [GajiController::class, 'store']);
+    Route::get('gaji/edit/{id}', [GajiController::class, 'edit']);
+    Route::get('gaji/update/{id}', [GajiController::class, 'update']);
+    Route::get('gaji/delete/{id}', [GajiController::class, 'destroy']);
 });

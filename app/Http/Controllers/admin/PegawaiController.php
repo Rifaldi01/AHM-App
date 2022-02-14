@@ -16,11 +16,11 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawai = Pegawai::join('jabatans','jabatans.id','=','pegawais.jabatan_id')
-                            ->select('jabatans.*','pegawais.*')
-                            ->get();
+        $pegawai = Pegawai::join('jabatans', 'jabatans.id', '=', 'pegawais.jabatan_id')
+            ->select('jabatans.*', 'pegawais.*')
+            ->get();
         $jabatan = Jabatan::all();
-        return view('admin.pegawai.index', compact('pegawai','jabatan'));
+        return view('admin.pegawai.index', compact('pegawai', 'jabatan'));
     }
 
     /**
@@ -42,13 +42,24 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $validated = $request->validate([
-            'nama_lengkap'   => 'required',
-            'jenis_kelamin'  => 'required',
-            'no_hp'          => 'required|unique:pegawais,no_hp',
-            'email'          => 'required|unique:pegawais,email',
-            'alamat'        => 'required'
-        ]);
+        $request->validate(
+            [
+                'nama_lengkap'   => 'required',
+                'jenis_kelamin'  => 'required',
+                'no_hp'          => 'required|unique:pegawais,no_hp,',
+                'email'          => 'required|unique:pegawais,email,',
+                'alamat'        => 'required'
+            ],
+            [
+                'nama_lengkap.required'     => 'Nama lengkap wajib di isi',
+                'jenis_kelamin.required'    => 'Jenis Kelamin wajib di isi',
+                'no_hp.required'            => 'No Hp wajib di isi',
+                'alamat.required'            => 'Alamat Wajib di isi',
+                'email.required'            => 'Email Wajib di isi',
+                'email.unique'            => 'Email sudah di gunakan',
+                'no_hp.unique'            => 'No hp sudah di gunakan',
+            ]
+        );
         $pegawai = Pegawai::create([
             'nama_lengkap' => $request->nama_lengkap,
             'jabatan_id'   => $request->jabatan_id,
@@ -57,7 +68,7 @@ class PegawaiController extends Controller
             'no_hp' => $request->no_hp,
             'alamat' => $request->alamat,
         ]);
-        return redirect()->route('daftar-pegawai')->with('success','Data berhasil di tambahkan');
+        return redirect()->route('daftar-pegawai')->with('success', 'Data berhasil di tambahkan');
     }
 
     /**
@@ -81,7 +92,7 @@ class PegawaiController extends Controller
     {
         $pegawai = Pegawai::find($id);
         $jabatan = Jabatan::all();
-        return view('admin.pegawai.edit', compact('pegawai','jabatan'));
+        return view('admin.pegawai.edit', compact('pegawai', 'jabatan'));
     }
 
     /**
@@ -94,13 +105,24 @@ class PegawaiController extends Controller
     public function update(Request $request, $id)
     {
 
-        $validated = $request->validate([
-            'nama_lengkap'   => 'required',
-            'jenis_kelamin'  => 'required',
-            'no_hp'          => 'required|unique:pegawais,no_hp,'.$id,
-            'email'          => 'required|unique:pegawais,email,'.$id,
-            'alamat'        => 'required'
-        ]);
+        $request->validate(
+            [
+                'nama_lengkap'   => 'required',
+                'jenis_kelamin'  => 'required',
+                'no_hp'          => 'required|unique:pegawais,no_hp,' . $id,
+                'email'          => 'required|unique:pegawais,email,' . $id,
+                'alamat'        => 'required'
+            ],
+            [
+                'nama_lengkap.required'     => 'Nama lengkap wajib di isi',
+                'jenis_kelamin.required'    => 'Jenis Kelamin wajib di isi',
+                'no_hp.required'            => 'No Hp wajib di isi',
+                'alamat.required'            => 'Alamat Wajib di isi',
+                'email.required'            => 'Email Wajib di isi',
+                'email.unique'            => 'Email sudah di gunakan',
+                'no_hp.unique'            => 'No hp sudah di gunakan',
+            ]
+        );
         $pegawai = Pegawai::find($id);
         $pegawai->update([
             'nama_lengkap' => $request->nama_lengkap,
@@ -110,7 +132,7 @@ class PegawaiController extends Controller
             'no_hp' => $request->no_hp,
             'alamat' => $request->alamat,
         ]);
-        return redirect()->route('daftar-pegawai')->with('success','Data berhasil di update');
+        return redirect()->route('daftar-pegawai')->with('success', 'Data berhasil di update');
     }
 
     /**
@@ -123,6 +145,6 @@ class PegawaiController extends Controller
     {
         $pegawai = Pegawai::find($id);
         $pegawai->delete();
-        return redirect()->back()->with('success','Data berhasil di hapus');
+        return redirect()->back()->with('success', 'Data berhasil di hapus');
     }
 }

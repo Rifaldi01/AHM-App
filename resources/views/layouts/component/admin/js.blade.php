@@ -15,4 +15,8 @@
 <!--Sweet Alerts -->
 <script src="{{ asset('assets-2/plugins/alerts-boxes/js/sweetalert.min.js') }}"></script>
 <script src="{{ asset('assets-2/plugins/alerts-boxes/js/sweet-alert-script.js') }}"></script>
+<!--notification js -->
+<script src="{{ asset('assets-2/plugins/notifications/js/lobibox.min.js') }}"></script>
+<script src="{{ asset('assets-2/plugins/notifications/js/notifications.min.js') }}"></script>
+<script src="{{ asset('assets-2/plugins/notifications/js/notification-custom-script.js') }}"></script>
 @stack('js')

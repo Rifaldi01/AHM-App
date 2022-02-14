@@ -60,8 +60,12 @@
                     @csrf
                     <div class="form-group">
                         <label for="input-1">Nama Jabatan</label>
-                        <input type="text" name="nama_jabatan" required class="form-control" id="input-1"
-                            placeholder="Enter Your Name">
+                        <input type="text" name="nama_jabatan" required class="form-control @error('nama_jabatan')
+                        is-invalid
+                        @enderror" id="input-1" placeholder="Enter Your Name">
+                        @error('nama_jabatan')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i>
                         Simpan</button>
