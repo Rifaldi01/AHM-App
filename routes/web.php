@@ -51,4 +51,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () 
     Route::get('jabatan/edit/{id}',[JabatanController::class,'edit'])->name('edit-jabatan');
     Route::post('jabatan/update/{id}',[JabatanController::class,'update'])->name('update-jabatan');
     Route::get('jabatan/delete/{id}',[JabatanController::class,'destroy'])->name('delete-jabatan');
+
+    // Route Gaji
+    Route::get('gaji',[GajiController::class,'index']);
+    Route::get('gaji/store',[GajiController::class,'store']);
+    Route::get('gaji/edit/{id}',[GajiController::class,'edit']);
+    Route::get('gaji/update/{id}',[GajiController::class,'update']);
+    Route::get('gaji/delete/{id}',[GajiController::class,'destroy']);
 });
